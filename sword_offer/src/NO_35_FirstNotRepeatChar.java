@@ -23,3 +23,4 @@ public class NO_35_FirstNotRepeatChar {
     public static void main(String[] args) {
     }
 }
+
