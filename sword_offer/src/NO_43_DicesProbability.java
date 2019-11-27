@@ -3,6 +3,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+//把 n 个骰子仍在地上，所有骰子朝上一面的点数之和为 s。输入 n，打印出 s 的所有可能的值出现的概率
+//用动态规划
+//设扔 n 个骰子时排列数之和为 s 的函数为f(n,s)
+//f(n,s)=f(n-1,s-1)+f(n-1,s-2)+f(n-1,s-3)+f(n-1,s-4)+f(n-1,s-5)+f(n-1,s-6),n<=s<=6n
+//f(1,1)=f(1,2)=f(1,3)=f(1,4)=f(1,5)=f(1,6)=1
 public class NO_43_DicesProbability {
     public static List<Map.Entry<Integer, Double>> dicesSum(int n) {
         final int face = 6;
