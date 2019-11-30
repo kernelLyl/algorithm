@@ -1,48 +1,47 @@
 public class NO_49_StringToInt {
-    public static boolean flag;
     public static int StrToInt(String str) {
-        flag = false;
-        //判断输入是否合法
-        if (str == null || str.trim().equals("")) {
-            flag = true;
-            return 0;
-        }
-        // symbol=0,说明该数为正数;symbol=1，该数为负数;
-        // start用来区分第一位是否为符号位
-        int symbol = 0;
-        int start = 0;
-        char[] chars = str.trim().toCharArray();
-        if (chars[0] == '+') {
+        if(str == null || str.length() == 0)return 0;
+        int start;
+        int tag ;
+        if(str.charAt(0)=='+'){
+            tag = 1;
             start = 1;
-        } else if (chars[0] == '-') {
-            start = 1;
-            symbol = 1;
         }
-        int result = 0;
-        for (int i = start; i < chars.length; i++) {
-            if (chars[i] > '9' || chars[i] < '0') {
-                flag = true;
+        else if (str.charAt(0)=='-') {
+            tag = 0;
+            start =1;
+        }else {
+            tag = 1;
+            start = 0;
+        }
+        long result = 0;
+        for(int i=start;i<str.length();i++){
+            char tmp = str.charAt(i);
+            if(tmp >= '0'&& tmp<='9'){
+                result = result*10 +(tmp-'0');
+
+                //注意int数据溢出的问题
+                if(tag == 1 && result>Integer.MAX_VALUE)
+                    return 0;
+                if(tag == 0 && (result - 1)>Integer.MAX_VALUE)
+                    return 0;
+            }
+            else {
                 return 0;
             }
-            int sum= result * 10 + (int) (chars[i] - '0');
-
-
-            //判断是否是数字字符
-            if((sum-(int) (chars[i] - '0'))/10!=result){
-                flag=true;
-                return 0;
-            }
-
-            result=result * 10 + (int) (chars[i] - '0');
-            /*
-             * 本人认为java热门第一判断是否溢出是错误的，举个反例
-             * 当输入为value=2147483648时，在计算机内部的表示应该是-2147483648
-             * 显然value>Integer.MAX_VALUE是不成立的
-             */
         }
-        // 注意：java中-1的n次方不能用：(-1)^n .'^'异或运算
-        // 注意，当value=-2147483648时，value=-value
-        result = (int) Math.pow(-1, symbol) * result;
-        return result;
+
+        if(tag == 0)
+            return (int) (-1*result);
+        else {
+            return (int) result;
+        }
+    }
+
+    public static void main(String[] args) {
+        System.out.println(Integer.MAX_VALUE);
+        System.out.println(Integer.MIN_VALUE);
+        int i = StrToInt("-2147483649");
+        System.out.println(i);
     }
 }
