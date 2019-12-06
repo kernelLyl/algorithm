@@ -10,12 +10,12 @@ public class NO_06_PrintListInReverseOrder {
         //推荐实现了Deque接口的LinkedList来充当栈
         Deque<Integer> deque = new LinkedList<>();
         while(listNode != null) {
-            deque.addFirst(listNode.val);
+            deque.offerFirst(listNode.val);
             listNode = listNode.next;
         }
 
         while(!deque.isEmpty()) {
-            result.add(deque.removeFirst());
+            result.add(deque.pollFirst());
         }
 
         return result;
