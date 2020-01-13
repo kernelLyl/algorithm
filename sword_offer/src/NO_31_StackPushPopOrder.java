@@ -8,13 +8,11 @@ public class NO_31_StackPushPopOrder {
         }
 
         LinkedList<Integer> stack = new LinkedList<>();
-        stack.add(pushA[0]);
-        int j = 1;
+        int j = 0;
 
-        for(int i = 0; i < popA.length;) {
-            if(stack.peekLast() == popA[i]) {
+        for(int i = 0; i < popA.length; i ++) {
+            if(!stack.isEmpty() && stack.peekLast() == popA[i]) {
                 stack.removeLast();
-                i++;
             } else {
                 while(true) {
                     if(j >= pushA.length) {
@@ -23,7 +21,6 @@ public class NO_31_StackPushPopOrder {
                     if(pushA[j] != popA[i]) {
                         stack.addLast(pushA[j++]);
                     } else {
-                        i ++;
                         j ++;
                         break;
                     }
