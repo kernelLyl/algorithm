@@ -8,7 +8,7 @@ public class QuickSort {
     public static int partition(int[] arr, int left, int right) {
         int temp = arr[left];
         while(left < right) {
-            while((right > left) && (arr[right] > temp)) {
+            while((right > left) && (arr[right] >= temp)) {
                 right --;
             }
 
@@ -17,7 +17,7 @@ public class QuickSort {
             }
 
 
-            while((left < right) && (arr[left] < temp)) {
+            while((left < right) && (arr[left] <= temp)) {
                 left ++;
             }
 
@@ -40,7 +40,7 @@ public class QuickSort {
     }
 
     public static void main(String[] args) {
-        int[] a = {2, 62, 45, 1, 561, 61, 46, 6};
+        int[] a = {2, 62, 45, 1, 561, 61, 46, 6,6,6,7,7,8};
         quickSort(a, 0, (a.length - 1));
         System.out.println(Arrays.toString(a));
     }
