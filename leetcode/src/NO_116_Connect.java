@@ -1,6 +1,7 @@
 import java.util.Deque;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.regex.Pattern;
 
 public class NO_116_Connect {
 
@@ -34,6 +35,15 @@ public class NO_116_Connect {
             }
         }
         return root;
+    }
+
+    public static final String REGEX_REALNAME = "^[\\u4e00-\\u9fa5]+(•[\\u4e00-\\u9fa5]*)*$|^[\\u4e00-\\u9fa5]+(·[\\u4e00-\\u9fa5]*)*$";
+
+    public static void main(String[] args) {
+
+        System.out.println(Pattern.matches(REGEX_REALNAME, "所"));
+
+
     }
 
     class Node {
