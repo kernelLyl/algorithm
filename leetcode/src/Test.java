@@ -2,38 +2,46 @@ import java.util.*;
 
 public class Test {
 
-    public int[] findRedundantConnection(int[][] edges) {
-        int nodeCount = edges.length;
+    public static void main(String[] args) {
+        int[] array = {2, 62, 45, 1, 561, 61, 46, 68};
+        System.out.println(Arrays.toString(array));
+        Test test = new Test();
+        test.quickSort(array, 0, array.length - 1);
+        System.out.println(Arrays.toString(array));
 
-        int[] parent = new int[nodeCount + 1];
+    }
 
-        for (int i = 1; i <= nodeCount; i ++) {
-            parent[i] = i;
+    private void quickSort(int[] array, int l, int h) {
+        if (l >= h) {
+            return;
         }
+        int n = partition(array, l, h);
+        quickSort(array, l, n - 1);
+        quickSort(array, n + 1, h);
+    }
 
-        for (int i = 0; i < nodeCount; i ++) {
-            int[] edge = edges[i];
+    private int partition(int[] array, int l, int h) {
+        int temp = array[l];
 
-            int node1 = edge[0], node2 = edge[1];
+        while (l < h) {
+            while (l < h && array[h] >= temp) {
+                h --;
+            }
+            if (l < h) {
+                array[l] = array[h];
+            }
 
-            if (find(parent, node1) != find(parent, node2)) {
-                union(parent, node1, node2);
-            } else {
-                return edge;
+            while (l < h && array[l] <= temp) {
+                l ++;
+            }
+
+            if (l < h) {
+                array[h] = array[l];
             }
         }
-        return new int[0];
+        array[l] = temp;
+        return l;
     }
 
-    public int find(int[] parent, int index) {
-        if (parent[index] != index) {
-            parent[index] = find(parent, parent[index]);
-        }
-        return parent[index];
-    }
-
-    public void union(int[] parent, int node1, int node2) {
-        parent[find(parent, node1)] = parent[find(parent, node2)];
-    }
 
 }
