@@ -1,30 +1,53 @@
 import java.util.Arrays;
+import java.util.Random;
 
 //快速排序
 public class QuickSort {
 
-    public static int partition(int[] arr, int left, int right) {
-        int temp = arr[left];
-        while(left < right) {
-            while((right > left) && (arr[right] >= temp)) {
-                right --;
-            }
+    private static Random random = new Random(System.currentTimeMillis());
 
-            if(right > left) {
-                arr[left] = arr[right];
-            }
-
-
-            while((left < right) && (arr[left] <= temp)) {
-                left ++;
-            }
-
-            if(left < right) {
-                arr[right] = arr[left];
-            }
+    public static int partition(int[] nums, int left, int right) {
+        // 在区间随机选择一个元素作为标定点
+        if (right > left) {
+            int randomIndex = left + 1 + random.nextInt(right - left);
+            swap(nums, left, randomIndex);
         }
-        arr[left] = temp;
-        return left;
+
+        int pivot = nums[left];
+
+        // 将等于 pivot 的元素分散到两边
+        // [left, lt) <= pivot
+        // (rt, right] >= pivot
+
+        int lt = left + 1;
+        int rt = right;
+
+        while (true) {
+            //当跳出while循环时,lt指的是大于pivot的
+            while (lt <= rt && nums[lt] <= pivot) {
+                lt++;
+            }
+            //当跳出while循环时,rt指的是小于pivot的
+            while (lt <= rt && nums[rt] >= pivot) {
+                rt--;
+            }
+
+            if (lt > rt) {
+                break;
+            }
+            swap(nums, lt, rt);
+            lt++;
+            rt--;
+        }
+
+        swap(nums, left, rt);
+        return rt;
+    }
+
+    private static void swap(int[] nums, int index1, int index2) {
+        int temp = nums[index1];
+        nums[index1] = nums[index2];
+        nums[index2] = temp;
     }
 
 
@@ -47,7 +70,7 @@ public class QuickSort {
 
     public static void main(String[] args) {
         int[] a = {2, 62, 45, 1, 561, 61, 46, 6,6,6,7,7,8};
-        quickSort1(a, 0, (a.length - 1));
+        quickSort(a, 0, (a.length - 1));
         System.out.println(Arrays.toString(a));
     }
 
