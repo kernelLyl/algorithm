@@ -1,14 +1,15 @@
 import java.util.*;
 
-public class Test {
-    public static void main(String[] args) {
-    }
-
+public class NO_103_ZigzagLevelOrder {
     public List<List<Integer>> zigzagLevelOrder(TreeNode root) {
+        List<List<Integer>> ans = new ArrayList();
+        if (root == null) {
+            return ans;
+        }
         Queue<TreeNode> queue = new LinkedList<>();
         queue.offer(root);
         int n = 0;
-        List<List<Integer>> ans = new ArrayList();
+
         while(!queue.isEmpty()) {
             int size = queue.size();
             Deque<Integer> deque = new LinkedList();
@@ -27,19 +28,21 @@ public class Test {
                 }
             }
             ans.add((List)deque);
+            n ++;
         }
         return ans;
+
     }
+
+
     public class TreeNode {
-      int val;
-      TreeNode left;
-      TreeNode right;
-      TreeNode() {}
-      TreeNode(int val) { this.val = val; }
-      TreeNode(int val, TreeNode left, TreeNode right) {
-          this.val = val;
-          this.left = left;
-          this.right = right;
-      }
-  }
+        int val;
+        TreeNode left;
+        TreeNode right;
+
+        TreeNode(int x) {
+            val = x;
+        }
+    }
+
 }
