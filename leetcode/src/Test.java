@@ -2,6 +2,17 @@ import java.util.*;
 
 public class Test {
     public static void main(String[] args) {
+        List<List<Integer>> ans = new ArrayList<>();
+        Queue queue = new LinkedList<Integer>();
+        ans.add(new ArrayList<>());
+    }
+    public ArrayList<ArrayList<Integer>> levelOrder (TreeNode root) {
+        // write code here
+        ArrayList<ArrayList<Integer>> ans = new ArrayList<>();
+        Queue queue = new LinkedList<Integer>();
+
+
+        return ans;
     }
 
     public List<List<Integer>> zigzagLevelOrder(TreeNode root) {
